@@ -1,0 +1,34 @@
+# Render Blueprint: Medusa backend + admin (see store/DEPLOY.md)
+services:
+  - type: web
+    name: lunara-backend
+    runtime: node
+    plan: free
+    rootDir: store
+    buildCommand: >-
+      npm install -g pnpm@10.11.1 &&
+      pnpm install --frozen-lockfile &&
+      pnpm --filter @dtc/backend build &&
+      cd apps/backend/.medusa/server && npm install --omit=dev
+    # Heap cap keeps the process under the free plan's 512 MB
+    startCommand: >-
+      cd apps/backend/.medusa/server &&
+      NODE_ENV=production NODE_OPTIONS=--max-old-space-size=256 npx medusa start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: MEDUSA_BACKEND_URL
+        sync: false
+      - key: ADMIN_CORS
+        sync: false
+      - key: AUTH_CORS
+        sync: false
+      - key: STORE_CORS
+        sync: false

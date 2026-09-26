@@ -17,5 +17,9 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET,
       cookieSecret: process.env.COOKIE_SECRET,
     }
-  }
+  },
+  // backendUrl defaults to MEDUSA_BACKEND_URL
+  admin: {
+    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
+  },
 })
