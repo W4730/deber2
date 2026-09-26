@@ -11,59 +11,36 @@ export const BRAND = {
   facebook: "https://facebook.com",
 }
 
+const unsplash = (id: string, w = 1200) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`
+
+// Keyed by product category handle
 export const CATEGORY_VISUALS: Record<
   string,
   { image: string; subtitle: string }
 > = {
   necklaces: {
-    image:
-      "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=80",
-    subtitle: "Everyday gold & pearls",
-  },
-  shirts: {
-    image:
-      "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("1600721391776-b5cd0e0048f9"),
     subtitle: "Everyday gold & pearls",
   },
   "personalized-necklaces": {
-    image:
-      "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=80",
-    subtitle: "Letters, names & dates",
-  },
-  sweatshirts: {
-    image:
-      "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("1620656798579-1984d9e87df7"),
     subtitle: "Letters, names & dates",
   },
   sets: {
-    image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
-    subtitle: "Layered jewelry sets",
-  },
-  pants: {
-    image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("1601121141461-9d6647bca1ed"),
     subtitle: "Layered jewelry sets",
   },
   "new-arrivals": {
-    image:
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80",
-    subtitle: "Just landed",
-  },
-  merch: {
-    image:
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("1611085583191-a3b181a88401"),
     subtitle: "Just landed",
   },
   "best-sellers": {
-    image:
-      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("1599643478518-a784e5dc4c8f"),
     subtitle: "Most loved pieces",
   },
 }
 
-export const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1800&q=80"
+export const HERO_IMAGE = unsplash("1611652022419-a9419f74343d", 1800)
 
-export const PROMO_IMAGE =
-  "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1600&q=80"
+export const PROMO_IMAGE = unsplash("1515562141207-7a88fb7ce338", 1600)

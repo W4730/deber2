@@ -7,7 +7,7 @@ module.exports = defineConfig({
     databaseUrl: process.env.DATABASE_URL,
     databaseDriverOptions: {
       connection: {
-        ssl: { rejectUnauthorized: false },
+        ssl: /localhost|127.0.0.1/.test(process.env.DATABASE_URL ?? "") ? false : { rejectUnauthorized: false },
       },
     },
     http: {

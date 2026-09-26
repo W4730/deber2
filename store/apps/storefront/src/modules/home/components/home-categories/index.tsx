@@ -2,33 +2,23 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { CATEGORY_VISUALS } from "@lib/constants/brand"
 import { HttpTypes } from "@medusajs/types"
 
-const fallback = [
-  { name: "Necklaces", handle: "store", image: CATEGORY_VISUALS.necklaces.image, subtitle: "Everyday gold & pearls" },
-  { name: "Personalized", handle: "store", image: CATEGORY_VISUALS["personalized-necklaces"].image, subtitle: "Letters, names & dates" },
-  { name: "Sets", handle: "store", image: CATEGORY_VISUALS.sets.image, subtitle: "Layered jewelry sets" },
-  { name: "New Arrivals", handle: "store", image: CATEGORY_VISUALS["new-arrivals"].image, subtitle: "Just landed" },
-  { name: "Best Sellers", handle: "store", image: CATEGORY_VISUALS["best-sellers"].image, subtitle: "Most loved pieces" },
-]
-
 export default function HomeCategories({
   categories,
 }: {
   categories: HttpTypes.StoreProductCategory[]
 }) {
-  const cards =
-    categories?.filter((c) => !c.parent_category).slice(0, 5).map((category) => {
-      const visual =
-        CATEGORY_VISUALS[category.handle] ||
-        CATEGORY_VISUALS.necklaces
-      return {
-        name: category.name,
-        handle: `/categories/${category.handle}`,
-        image: visual.image,
-        subtitle: visual.subtitle,
-      }
-    }) || []
+  const items = categories
+    .filter((c) => !c.parent_category)
+    .slice(0, 5)
+    .map((category) => ({
+      name: category.name,
+      handle: `/categories/${category.handle}`,
+      ...(CATEGORY_VISUALS[category.handle] || CATEGORY_VISUALS.necklaces),
+    }))
 
-  const items = cards.length ? cards : fallback.map((item) => ({ ...item, handle: `/${item.handle}` }))
+  if (!items.length) {
+    return null
+  }
 
   return (
     <section className="content-container py-16 small:py-24">
@@ -40,7 +30,7 @@ export default function HomeCategories({
         {items.map((item) => (
           <LocalizedClientLink
             key={item.name}
-            href={item.handle.startsWith("/") ? item.handle : `/categories/${item.handle}`}
+            href={item.handle}
             className="group overflow-hidden rounded-2xl bg-lunara-blush"
           >
             <div

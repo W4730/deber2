@@ -7,6 +7,7 @@ import { BRAND } from "@lib/constants/brand"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
+import CurrencySelect from "@modules/layout/components/currency-select"
 import SearchToggle from "@modules/layout/components/search-toggle"
 import SideMenu from "@modules/layout/components/side-menu"
 import WishlistNavLink from "@modules/layout/components/wishlist-nav-link"
@@ -15,8 +16,8 @@ import User from "@modules/common/icons/user"
 const links = [
   { href: "/", label: "Home" },
   { href: "/store", label: "Shop" },
-  { href: "/store", label: "Necklaces" },
-  { href: "/store", label: "Categories" },
+  { href: "/categories/necklaces", label: "Necklaces" },
+  { href: "/categories/personalized-necklaces", label: "Personalized" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ]
@@ -65,6 +66,7 @@ export default async function Nav() {
           </div>
 
           <div className="flex items-center justify-end gap-1 h-full flex-1 basis-0 text-lunara-ink">
+            <CurrencySelect regions={regions} />
             <SearchToggle />
             <WishlistNavLink />
             <LocalizedClientLink
