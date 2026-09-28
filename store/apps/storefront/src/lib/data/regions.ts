@@ -7,6 +7,8 @@ import { getCacheOptions } from "./cookies"
 export const listRegions = async () => {
   const next = {
     ...(await getCacheOptions("regions")),
+    // Regions created in the admin show up within an hour, like middleware.ts
+    revalidate: 3600,
   }
 
   return await sdk.client
@@ -21,6 +23,7 @@ export const listRegions = async () => {
 export const retrieveRegion = async (id: string) => {
   const next = {
     ...(await getCacheOptions(["regions", id].join("-"))),
+    revalidate: 3600,
   }
 
   return await sdk.client
